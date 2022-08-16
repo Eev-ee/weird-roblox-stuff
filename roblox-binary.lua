@@ -251,7 +251,20 @@ local function write_Array_BrickColor(colors)
 end
 
 local function write_Color3(color)
-    return write_Float32(color.R) .. write_Float32(color.G) .. write_Float32(color.B)
+    local result = table.create(12)
+    local r = write_Float32(color.R)
+    local g = write_Float32(color.G)
+    local b = write_Float32(color.B)
+    local flattened = r .. g .. b
+
+    for i = 1, 3 do
+        for j = 1, 4 do
+            local k = i + 3*(j - 1)
+            result[k] = string.sub(flattened, k, k)
+        end
+    end
+
+    return table.concat(result)
 end
 local function write_Array_Color3(colors)
     local row = #colors
@@ -482,7 +495,7 @@ end
 
 
 
-local str = write_Array_UDim({UDim.new(1, 2), UDim.new(3, 4)})
+local str = write_Color3(Color3.fromRGB(255, 180, 20))
 local a = ""
 for i = 1, #str do
     local byte = str:byte(i, i)
