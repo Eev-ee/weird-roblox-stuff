@@ -1,7 +1,7 @@
 local function cbrt( x )
 	return x < 0 and -(-x)^(1/3) or x^(1/3)
 end
-local function lerp( a, b, t ) --Guarantees monocity
+local function lerp( a, b, t ) --Guarantees monotonicity
 	if t <= 0.5 then
 		return a + (b - a)*t
 	end
