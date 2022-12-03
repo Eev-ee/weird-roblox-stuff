@@ -1,7 +1,7 @@
 local function cbrt( x )
 	return x < 0 and -(-x)^(1/3) or x^(1/3)
 end
-local function lerp( a, b, t ) --Guarantees monotonicity
+local function lerp( a, b, t ) --Guarantees monocity
 	if t <= 0.5 then
 		return a + (b - a)*t
 	end
@@ -67,9 +67,9 @@ local function create_interpolator( c0: Color3, c1: Color3 )
 			lr, lg, lb = lr - lb, lg - lb, 0
 		end
 
-		local r, g, b = math.clamp(lr <= 0.00313066844250063 and lr*12.92 or 1.055*lr^(1/2.4) - 0.055, 0, 1),
-						math.clamp(lg <= 0.00313066844250063 and lg*12.92 or 1.055*lg^(1/2.4) - 0.055, 0, 1),
-						math.clamp(lb <= 0.00313066844250063 and lb*12.92 or 1.055*lb^(1/2.4) - 0.055, 0, 1)
+		local r, g, b = math.clamp(lr <= 0.00313066844250063 and (lr*12.92) or (1.055*lr^(1/2.4) - 0.055), 0, 1),
+						math.clamp(lg <= 0.00313066844250063 and (lg*12.92) or (1.055*lg^(1/2.4) - 0.055), 0, 1),
+						math.clamp(lb <= 0.00313066844250063 and (lb*12.92) or (1.055*lb^(1/2.4) - 0.055), 0, 1)
 
 		return Color3.new(r, g, b)
 	end
