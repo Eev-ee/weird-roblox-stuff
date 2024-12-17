@@ -2,10 +2,10 @@ local function cbrt( x )
 	return x < 0 and -(-x)^(1/3) or x^(1/3)
 end
 local function lerp( a, b, t ) --Guarantees monotonicity
-	if t <= 0.5 then
+	if t < 0.5 then
 		return a + (b - a)*t
 	end
-	return b - (b - a)*(1 - t)
+	return b + (b - a)*(t - 1)
 end
 
 local function create_interpolator( c0: Color3, c1: Color3 )
